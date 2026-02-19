@@ -80,6 +80,7 @@ export const Styled = {
             padding: 8px 10px;
             border-radius: 8px;
             line-height: 1.25;
+            text-decoration: none; /* underline removed */
             transition:
                 background 0.15s ease,
                 color 0.15s ease,
@@ -90,6 +91,7 @@ export const Styled = {
             background: var(--color-surface);
             color: var(--color-text-primary);
             transform: translateX(1px);
+            text-decoration: none;
         }
 
         .sideNav a:focus-visible {

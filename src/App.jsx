@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Styled } from "./App.styled";
 import Home from "./pages/home";
 import Header from "./components/header";
+import Footer from "./components/footer";
 
 const THEME_KEY = "htmlCoreNotesTheme";
 const NAV_KEY = "htmlCoreNotesActiveNav";
@@ -607,7 +608,7 @@ const App = () => {
                     </div>
 
                     <div className="footerWrapper">
-                        <Styled.Footer>footer</Styled.Footer>
+                        <Footer />
                     </div>
                 </section>
             </Styled.Main>
