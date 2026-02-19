@@ -35,7 +35,7 @@ const App = () => {
                     {/* <div className="aboutHtml"></div> */}
                     <AboutHtml />
 
-                    <TopicsMap />
+                    {/* <TopicsMap /> */}
 
                     {/* foundation */}
                     <Introduction />
