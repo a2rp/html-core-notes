@@ -41,20 +41,14 @@ export const Styled = {
             height: 100%;
             overflow-y: auto;
             padding: 14px;
+            scroll-behavior: smooth;
         }
 
-        /* ✅ NAV STYLES MUST BE OUTSIDE MEDIA QUERY */
         .sideNav {
             display: flex;
             flex-direction: column;
             gap: 18px;
             font-size: 14px;
-        }
-
-        .sideNav a.isActive {
-            background: var(--color-surface-2);
-            color: var(--color-text-primary);
-            box-shadow: inset 0 0 0 1px var(--color-border);
         }
 
         .navSection {
@@ -103,12 +97,20 @@ export const Styled = {
             outline-offset: 2px;
         }
 
+        .sideNav a.isActive {
+            background: var(--color-surface-2);
+            color: var(--color-text-primary);
+            box-shadow: inset 0 0 0 1px var(--color-border);
+        }
+
         .contentFooterWrapper {
             flex: 1;
             min-width: 0;
             height: 100%;
             overflow-y: auto;
             background: var(--color-bg);
+            scroll-behavior: smooth;
+            scroll-padding-top: 14px;
         }
 
         .contentWrapper {
@@ -122,7 +124,6 @@ export const Styled = {
             padding: 12px 18px;
         }
 
-        /* Mobile */
         @media (width < 900px) {
             flex-direction: column;
 
@@ -141,8 +142,13 @@ export const Styled = {
             }
 
             .contentFooterWrapper {
-                height: auto;
                 flex: 1;
+                min-width: 0;
+                height: 100%;
+                overflow-y: auto;
+                background: var(--color-bg);
+                scroll-behavior: smooth;
+                scroll-padding-top: 14px;
             }
         }
     `,

@@ -1,16 +1,49 @@
 // App.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Styled } from "./App.styled";
 import Home from "./pages/home";
 import Header from "./components/header";
-import Footer from "./components/footer";
 
 const THEME_KEY = "htmlCoreNotesTheme";
 const NAV_KEY = "htmlCoreNotesActiveNav";
 
+const SECTION_IDS = [
+    "doctype",
+    "head",
+    "body",
+    "semantic",
+    "block-inline",
+    "attributes",
+    "headings",
+    "paragraphs",
+    "lists",
+    "links",
+    "images",
+    "tables",
+    "forms",
+    "inputs",
+    "textarea",
+    "select",
+    "validation",
+    "audio",
+    "video",
+    "iframe",
+    "svg",
+    "canvas",
+    "accessibility",
+    "seo",
+    "performance",
+    "best-practices",
+];
+
 const App = () => {
     const [theme, setTheme] = useState("dark");
     const [activeNav, setActiveNav] = useState("");
+    const contentRef = useRef(null);
+
+    // blocks observer updates while we are doing programmatic smooth scroll
+    const lockRef = useRef(false);
+    const lockTimerRef = useRef(null);
 
     useEffect(() => {
         try {
@@ -39,6 +72,37 @@ const App = () => {
         setTheme(nextTheme);
     };
 
+    const ensureActiveInSideView = (hash) => {
+        requestAnimationFrame(() => {
+            const link = document.querySelector(`.sideNav a[href="${hash}"]`);
+            if (link) link.scrollIntoView({ block: "center" });
+        });
+    };
+
+    const scrollToSectionInContent = (id) => {
+        const container = contentRef.current;
+        const el = document.getElementById(id);
+
+        if (!container || !el) return;
+
+        const containerRect = container.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+
+        const top = container.scrollTop + (elRect.top - containerRect.top) - 14;
+
+        container.scrollTo({ top, behavior: "smooth" });
+    };
+
+    const setActiveAndPersist = (hash) => {
+        setActiveNav(hash);
+        try {
+            localStorage.setItem(NAV_KEY, hash);
+        } catch {
+            // ignore
+        }
+        ensureActiveInSideView(hash);
+    };
+
     // init active nav on load
     useEffect(() => {
         const fromHash = window.location.hash || "";
@@ -53,16 +117,11 @@ const App = () => {
         }
 
         if (initial) {
-            setActiveNav(initial);
+            setActiveAndPersist(initial);
 
-            // keep it in view inside side panel
+            const id = initial.replace("#", "");
             requestAnimationFrame(() => {
-                const link = document.querySelector(
-                    `.sideNav a[href="${initial}"]`,
-                );
-                if (link) {
-                    link.scrollIntoView({ block: "center" });
-                }
+                scrollToSectionInContent(id);
             });
         }
     }, []);
@@ -73,16 +132,11 @@ const App = () => {
             const h = window.location.hash || "";
             if (!h) return;
 
-            setActiveNav(h);
-            try {
-                localStorage.setItem(NAV_KEY, h);
-            } catch {
-                // ignore
-            }
+            setActiveAndPersist(h);
 
+            const id = h.replace("#", "");
             requestAnimationFrame(() => {
-                const link = document.querySelector(`.sideNav a[href="${h}"]`);
-                if (link) link.scrollIntoView({ block: "center" });
+                scrollToSectionInContent(id);
             });
         };
 
@@ -90,20 +144,83 @@ const App = () => {
         return () => window.removeEventListener("hashchange", onHashChange);
     }, []);
 
-    const handleNavClick = (e, hash) => {
-        // keep default anchor behavior, but also store + highlight + ensure in view
-        setActiveNav(hash);
+    const handleSideNavClick = (e, id) => {
+        e.preventDefault();
+
+        const hash = `#${id}`;
+
+        // lock scroll spy while we do smooth scroll
+        lockRef.current = true;
+        if (lockTimerRef.current) clearTimeout(lockTimerRef.current);
+        lockTimerRef.current = setTimeout(() => {
+            lockRef.current = false;
+        }, 700);
+
+        setActiveAndPersist(hash);
+
+        scrollToSectionInContent(id);
+
         try {
-            localStorage.setItem(NAV_KEY, hash);
+            window.history.replaceState(null, "", hash);
         } catch {
             // ignore
         }
-
-        requestAnimationFrame(() => {
-            const link = document.querySelector(`.sideNav a[href="${hash}"]`);
-            if (link) link.scrollIntoView({ block: "center" });
-        });
     };
+
+    // scroll spy - when section enters view, highlight in side nav
+    // scroll spy - manual calculation (more reliable)
+    useEffect(() => {
+        const container = contentRef.current;
+        if (!container) return;
+
+        const onScroll = () => {
+            if (!container) return;
+
+            const containerTop = container.getBoundingClientRect().top;
+
+            let currentId = "";
+
+            for (let i = 0; i < SECTION_IDS.length; i++) {
+                const id = SECTION_IDS[i];
+                const el = document.getElementById(id);
+                if (!el) continue;
+
+                const rect = el.getBoundingClientRect();
+
+                // section top crossed header offset area
+                if (rect.top - containerTop <= 120) {
+                    currentId = id;
+                }
+            }
+
+            if (!currentId) return;
+
+            const hash = `#${currentId}`;
+
+            setActiveNav((prev) => {
+                if (prev === hash) return prev;
+
+                try {
+                    localStorage.setItem(NAV_KEY, hash);
+                } catch {}
+
+                requestAnimationFrame(() => {
+                    const link = document.querySelector(
+                        `.sideNav a[href="${hash}"]`,
+                    );
+                    if (link) link.scrollIntoView({ block: "center" });
+                });
+
+                return hash;
+            });
+        };
+
+        container.addEventListener("scroll", onScroll);
+
+        return () => {
+            container.removeEventListener("scroll", onScroll);
+        };
+    }, []);
 
     return (
         <Styled.Wrapper>
@@ -126,7 +243,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#doctype")
+                                        handleSideNavClick(e, "doctype")
                                     }
                                 >
                                     Doctype & html
@@ -137,7 +254,9 @@ const App = () => {
                                     className={
                                         activeNav === "#head" ? "isActive" : ""
                                     }
-                                    onClick={(e) => handleNavClick(e, "#head")}
+                                    onClick={(e) =>
+                                        handleSideNavClick(e, "head")
+                                    }
                                 >
                                     Head & Meta
                                 </a>
@@ -147,7 +266,9 @@ const App = () => {
                                     className={
                                         activeNav === "#body" ? "isActive" : ""
                                     }
-                                    onClick={(e) => handleNavClick(e, "#body")}
+                                    onClick={(e) =>
+                                        handleSideNavClick(e, "body")
+                                    }
                                 >
                                     Body
                                 </a>
@@ -160,7 +281,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#semantic")
+                                        handleSideNavClick(e, "semantic")
                                     }
                                 >
                                     Semantic Tags
@@ -174,7 +295,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#block-inline")
+                                        handleSideNavClick(e, "block-inline")
                                     }
                                 >
                                     Block vs Inline
@@ -188,7 +309,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#attributes")
+                                        handleSideNavClick(e, "attributes")
                                     }
                                 >
                                     Global Attributes
@@ -206,7 +327,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#headings")
+                                        handleSideNavClick(e, "headings")
                                     }
                                 >
                                     Headings
@@ -220,7 +341,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#paragraphs")
+                                        handleSideNavClick(e, "paragraphs")
                                     }
                                 >
                                     Paragraphs
@@ -231,7 +352,9 @@ const App = () => {
                                     className={
                                         activeNav === "#lists" ? "isActive" : ""
                                     }
-                                    onClick={(e) => handleNavClick(e, "#lists")}
+                                    onClick={(e) =>
+                                        handleSideNavClick(e, "lists")
+                                    }
                                 >
                                     Lists
                                 </a>
@@ -241,7 +364,9 @@ const App = () => {
                                     className={
                                         activeNav === "#links" ? "isActive" : ""
                                     }
-                                    onClick={(e) => handleNavClick(e, "#links")}
+                                    onClick={(e) =>
+                                        handleSideNavClick(e, "links")
+                                    }
                                 >
                                     Links
                                 </a>
@@ -254,7 +379,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#images")
+                                        handleSideNavClick(e, "images")
                                     }
                                 >
                                     Images
@@ -268,7 +393,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#tables")
+                                        handleSideNavClick(e, "tables")
                                     }
                                 >
                                     Tables
@@ -283,7 +408,9 @@ const App = () => {
                                     className={
                                         activeNav === "#forms" ? "isActive" : ""
                                     }
-                                    onClick={(e) => handleNavClick(e, "#forms")}
+                                    onClick={(e) =>
+                                        handleSideNavClick(e, "forms")
+                                    }
                                 >
                                     Form Tag
                                 </a>
@@ -296,7 +423,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#inputs")
+                                        handleSideNavClick(e, "inputs")
                                     }
                                 >
                                     Input Types
@@ -310,7 +437,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#textarea")
+                                        handleSideNavClick(e, "textarea")
                                     }
                                 >
                                     Textarea
@@ -324,7 +451,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#select")
+                                        handleSideNavClick(e, "select")
                                     }
                                 >
                                     Select
@@ -338,7 +465,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#validation")
+                                        handleSideNavClick(e, "validation")
                                     }
                                 >
                                     Validation
@@ -353,7 +480,9 @@ const App = () => {
                                     className={
                                         activeNav === "#audio" ? "isActive" : ""
                                     }
-                                    onClick={(e) => handleNavClick(e, "#audio")}
+                                    onClick={(e) =>
+                                        handleSideNavClick(e, "audio")
+                                    }
                                 >
                                     Audio
                                 </a>
@@ -363,7 +492,9 @@ const App = () => {
                                     className={
                                         activeNav === "#video" ? "isActive" : ""
                                     }
-                                    onClick={(e) => handleNavClick(e, "#video")}
+                                    onClick={(e) =>
+                                        handleSideNavClick(e, "video")
+                                    }
                                 >
                                     Video
                                 </a>
@@ -376,7 +507,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#iframe")
+                                        handleSideNavClick(e, "iframe")
                                     }
                                 >
                                     Iframe
@@ -387,7 +518,9 @@ const App = () => {
                                     className={
                                         activeNav === "#svg" ? "isActive" : ""
                                     }
-                                    onClick={(e) => handleNavClick(e, "#svg")}
+                                    onClick={(e) =>
+                                        handleSideNavClick(e, "svg")
+                                    }
                                 >
                                     SVG
                                 </a>
@@ -400,7 +533,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#canvas")
+                                        handleSideNavClick(e, "canvas")
                                     }
                                 >
                                     Canvas
@@ -418,7 +551,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#accessibility")
+                                        handleSideNavClick(e, "accessibility")
                                     }
                                 >
                                     Accessibility
@@ -429,7 +562,9 @@ const App = () => {
                                     className={
                                         activeNav === "#seo" ? "isActive" : ""
                                     }
-                                    onClick={(e) => handleNavClick(e, "#seo")}
+                                    onClick={(e) =>
+                                        handleSideNavClick(e, "seo")
+                                    }
                                 >
                                     SEO Basics
                                 </a>
@@ -442,7 +577,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#performance")
+                                        handleSideNavClick(e, "performance")
                                     }
                                 >
                                     Performance
@@ -456,7 +591,7 @@ const App = () => {
                                             : ""
                                     }
                                     onClick={(e) =>
-                                        handleNavClick(e, "#best-practices")
+                                        handleSideNavClick(e, "best-practices")
                                     }
                                 >
                                     Best Practices
@@ -466,13 +601,13 @@ const App = () => {
                     </div>
                 </aside>
 
-                <section className="contentFooterWrapper">
+                <section className="contentFooterWrapper" ref={contentRef}>
                     <div className="contentWrapper">
                         <Home />
                     </div>
 
                     <div className="footerWrapper">
-                        <Footer />
+                        <Styled.Footer>footer</Styled.Footer>
                     </div>
                 </section>
             </Styled.Main>
