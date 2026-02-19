@@ -1,25 +1,43 @@
 // Header.jsx
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Styled } from "./styled";
 import transparentLogo from "/images/transparentLogo.png";
 import { FiMoon, FiSun } from "react-icons/fi";
 
-/*
-Props
-- theme: "dark" | "light"
-- onThemeChange: (nextTheme) => void
-*/
-const Header = ({ theme = "dark", onThemeChange }) => {
+const Header = () => {
     const [logoLoaded, setLogoLoaded] = useState(false);
+    const [theme, setTheme] = useState("dark");
+
+    // Initialize theme from localStorage or default
+    useEffect(() => {
+        const storedTheme = localStorage.getItem("app-theme");
+        const initialTheme = storedTheme || "dark";
+        setTheme(initialTheme);
+
+        if (initialTheme === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+        } else {
+            document.documentElement.removeAttribute("data-theme");
+        }
+    }, []);
+
+    // Apply theme + persist
+    useEffect(() => {
+        if (theme === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+        } else {
+            document.documentElement.removeAttribute("data-theme");
+        }
+
+        localStorage.setItem("app-theme", theme);
+    }, [theme]);
 
     const nextTheme = useMemo(() => {
         return theme === "light" ? "dark" : "light";
     }, [theme]);
 
     const handleToggle = () => {
-        if (typeof onThemeChange === "function") {
-            onThemeChange(nextTheme);
-        }
+        setTheme(nextTheme);
     };
 
     return (

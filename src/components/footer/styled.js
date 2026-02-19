@@ -7,11 +7,11 @@ export const Styled = {
         align-items: center;
         justify-content: space-between;
         gap: 12px;
+        padding: 15px;
+        border-top: 1px solid var(--color-border);
 
         font-size: 12px;
         color: var(--color-text-muted);
-
-        padding: 14px 0;
 
         .right a {
             color: var(--color-text-secondary);

@@ -11,6 +11,7 @@ import Lists from "./sections/textContent/lists";
 import Links from "./sections/textContent/links";
 import Images from "./sections/textContent/images";
 import Tables from "./sections/textContent/tables";
+import Forms from "./sections/forms/forms";
 
 const Home = () => {
     return (
@@ -30,6 +31,9 @@ const Home = () => {
             <Links />
             <Images />
             <Tables />
+
+            {/* forms */}
+            <Forms />
         </>
     );
 };
