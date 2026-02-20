@@ -5,6 +5,12 @@ A single-page, at-a-glance revision project for core HTML concepts.
 This project is designed as a fast reference and summary sheet covering essential HTML topics without unnecessary depth.
 It focuses on clarity, structure, and practical usage.
 
+---
+
+![alt text](image.png)
+
+---
+
 ## Purpose
 
 - Quick revision before interviews

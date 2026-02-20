@@ -60,36 +60,43 @@ const App = () => {
                     {/* <TopicsMap /> */}
 
                     {/* foundation */}
+                    <h1 className="category">Foundation</h1>
                     <Introduction />
                     <BasicDocumentStructure />
                     <HtmlSyntaxRules />
                     <ContentModel />
 
                     {/* text content */}
+                    <h1 className="category">Text Content</h1>
                     <Headings />
                     <ParagraphTextSemantics />
                     <Lists />
 
                     {/* links and navigations */}
+                    <h1 className="category">Links and Navigations</h1>
                     <Anchors />
                     <Navigation />
 
                     {/* media and embedded content */}
+                    <h1 className="category">Media and Embedded Content</h1>
                     <ImagesTopic />
                     <Embedded />
                     <SvgIntegration />
                     <CanvasBasics />
 
                     {/* structure and semantics */}
+                    <h1 className="category">Structure and Semantics</h1>
                     <SectioningElements />
                     <DocumentLandmarks />
                     <DetailsAndDisclosure />
                     <DialogTopic />
 
                     {/* tables */}
+                    <h1 className="category">Tables</h1>
                     <TableStructure />
 
                     {/* forms */}
+                    <h1 className="category">Forms</h1>
                     <FormBasics />
                     <InputTypes />
                     <FormControls />
@@ -97,20 +104,24 @@ const App = () => {
                     <AccessibilityInForms />
 
                     {/* meta data */}
+                    <h1 className="category">Meta Data</h1>
                     <MetaTags />
                     <LinkElement />
                     <BaseElement />
 
                     {/* scrooipts and perfromance */}
+                    <h1 className="category">Scripts and Performance</h1>
                     <ScriptElement />
                     <PerformanceAttributes />
 
                     {/* accessibility */}
+                    <h1 className="category">Accessibility</h1>
                     <AriaBasics />
                     <SemanticHtmlVsDivSoup />
                     <TabOrder />
 
                     {/* advanced */}
+                    <h1 className="category">Advanced</h1>
                     <Microdata />
                     <StructuredDataJsonLd />
                     <CustomDataAttributes />

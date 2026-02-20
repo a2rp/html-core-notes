@@ -29,32 +29,8 @@ export const Styled = {
             flex-direction: column;
             padding: 15px;
 
-            .contentTopicsLiistWrapper {
-                display: flex;
-                position: relative;
-                flex: 1;
-
-                .mainContent {
-                    /* border: 1px solid #f00; */
-                    width: 100%;
-                    min-height: 100vh;
-                }
-
-                .topicsList {
-                    border: 1px solid #f00;
-                    width: 300px;
-                    position: relative;
-
-                    .topicsWrapper {
-                        border: 1px solid #f00;
-                        height: calc(
-                            100vh - 160px
-                        ); /* 60px header + 100px top offset */
-                        position: sticky;
-                        top: 0;
-                        overflow-y: auto;
-                    }
-                }
+            .category {
+                margin: 30px 0 15px 0;
             }
         }
 

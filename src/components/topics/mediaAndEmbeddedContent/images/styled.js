@@ -9,6 +9,7 @@ export const Styled = {
         border-radius: 18px;
         overflow: hidden;
         box-shadow: 0 12px 30px var(--color-shadow);
+        margin-bottom: 5px;
 
         .topicHeader {
             width: 100%;
