@@ -22,6 +22,28 @@ import SectioningElements from "./components/topics/structureAndSemantics/sectio
 import DocumentLandmarks from "./components/topics/structureAndSemantics/documentLandmarks";
 import DetailsAndDisclosure from "./components/topics/mediaAndEmbeddedContent/detailsAndDisclosure";
 import DialogTopic from "./components/topics/structureAndSemantics/dialog";
+import TableStructure from "./components/topics/tables/tableStructure";
+import FormBasics from "./components/topics/forms/formBasics";
+import InputTypes from "./components/topics/forms/inputTypes";
+import FormControls from "./components/topics/forms/formControls";
+import Validation from "./components/topics/forms/validation";
+import AccessibilityInForms from "./components/topics/forms/accessibilityInForms";
+import MetaTags from "./components/topics/metadata/metaTags";
+import LinkElement from "./components/topics/metadata/linkElement";
+import BaseElement from "./components/topics/metadata/baseElement";
+import ScriptElement from "./components/topics/scriptsAndPerformance/scriptElement";
+import PerformanceAttributes from "./components/topics/scriptsAndPerformance/performanceAttributes";
+import AriaBasics from "./components/topics/accessibility/ariaBasics";
+import SemanticHtmlVsDivSoup from "./components/topics/accessibility/semanticHtmlVsDivSoup";
+import TabOrder from "./components/topics/accessibility/tabOrder";
+import Microdata from "./components/topics/advanced/microdata";
+import StructuredDataJsonLd from "./components/topics/advanced/structuredDataJsonLd";
+import CustomDataAttributes from "./components/topics/advanced/customDataAttributes";
+import Internationalization from "./components/topics/advanced/internationalization";
+import DeprecatedElements from "./components/topics/advanced/deprecatedElements";
+import HtmlLivingStandard from "./components/topics/advanced/htmlLivingStandard";
+import SeoFundamentals from "./components/topics/advanced/seoFundamentals";
+import SecurityBasics from "./components/topics/advanced/securityBasics";
 
 const App = () => {
     return (
@@ -63,6 +85,40 @@ const App = () => {
                     <DocumentLandmarks />
                     <DetailsAndDisclosure />
                     <DialogTopic />
+
+                    {/* tables */}
+                    <TableStructure />
+
+                    {/* forms */}
+                    <FormBasics />
+                    <InputTypes />
+                    <FormControls />
+                    <Validation />
+                    <AccessibilityInForms />
+
+                    {/* meta data */}
+                    <MetaTags />
+                    <LinkElement />
+                    <BaseElement />
+
+                    {/* scrooipts and perfromance */}
+                    <ScriptElement />
+                    <PerformanceAttributes />
+
+                    {/* accessibility */}
+                    <AriaBasics />
+                    <SemanticHtmlVsDivSoup />
+                    <TabOrder />
+
+                    {/* advanced */}
+                    <Microdata />
+                    <StructuredDataJsonLd />
+                    <CustomDataAttributes />
+                    <Internationalization />
+                    <DeprecatedElements />
+                    <HtmlLivingStandard />
+                    <SeoFundamentals />
+                    <SecurityBasics />
                 </div>
 
                 <div className="footerWrapper">

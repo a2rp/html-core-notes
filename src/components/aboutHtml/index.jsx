@@ -5,10 +5,14 @@ import { Styled } from "./styled";
 const AboutHtml = () => {
     const buildISO = __APP_BUILD_ISO__;
 
-    const formattedDate = new Date(buildISO).toLocaleDateString("en-US", {
+    const formattedDateTime = new Date(buildISO).toLocaleString("en-US", {
         year: "numeric",
         month: "long",
         day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
     });
 
     return (
@@ -42,7 +46,7 @@ const AboutHtml = () => {
 
                 <div className="meta">
                     <span className="metaLabel">Last updated:</span>
-                    <span className="metaValue">{formattedDate}</span>
+                    <span className="metaValue">{formattedDateTime}</span>
                 </div>
             </Styled.Content>
         </Styled.Wrapper>
