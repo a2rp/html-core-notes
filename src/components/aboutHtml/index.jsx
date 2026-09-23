@@ -16,7 +16,7 @@ const AboutHtml = () => {
     });
 
     return (
-        <Styled.Wrapper>
+        <Styled.Wrapper id="about-html">
             <Styled.Content>
                 <h2 className="heading">About HTML</h2>
 

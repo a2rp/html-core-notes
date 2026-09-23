@@ -1,67 +1,38 @@
 # HTML Core Notes
 
-A single-page, at-a-glance revision project for core HTML concepts.
+![HTML Core Notes preview](screenshot.png)
 
-This project is designed as a fast reference and summary sheet covering essential HTML topics without unnecessary depth.
-It focuses on clarity, structure, and practical usage.
+A single-page HTML revision guide for fast, practical learning. It organizes core concepts into expandable topic cards covering structure, semantics, content, forms, media, accessibility, metadata, performance, SEO, and security.
 
----
+## Features
 
-![alt text](image.png)
-
----
-
-## Purpose
-
-- Quick revision before interviews
-- Rapid recall of core concepts
-- Clean mental model of HTML fundamentals
-- Practical, production-focused reminders
-
-## Coverage
-
-- Document structure and metadata
-- Semantic layout
-- Text and content elements
-- Links and navigation
-- Images and media
-- Tables
-- Forms and validation
-- Accessibility essentials
-- Performance basics
-- SEO fundamentals
-- Common mistakes and best practices
+- Structured HTML notes grouped by learning category
+- Expandable topic cards with practical examples
+- Searchable topic map and quick navigation
+- Dark and light themes saved in local storage
+- Fixed header with mobile quick navigation
+- Independent content scroll with a floating scroll-to-top control
+- Icon-only developer and support links in the footer
 
 ## Tech Stack
 
-- React
-- Vite
-- styled-components
+React, Vite, styled-components, react-icons, and CSS custom properties.
 
-## Project Type
-
-Single page only  
-Section-based navigation  
-Searchable and expandable content  
-No blog-style content, only structured notes
-
-## Run Locally
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Build
+## Deployment
 
 ```bash
 npm run build
+npm run deploy
 ```
 
-## Goal
-
-Complete core HTML knowledge in one scrollable page.
-No fluff. No repetition. Just essentials.
+Live app: [https://a2rp.github.io/html-core-notes/](https://a2rp.github.io/html-core-notes/)
 
 ## Links
 
@@ -78,22 +49,3 @@ No fluff. No repetition. Just essentials.
 - Support: [https://a2rp-donation-page.netlify.app/](https://a2rp-donation-page.netlify.app/)
 - Buy Me A Coffee: [https://buymeacoffee.com/a2rp](https://buymeacoffee.com/a2rp)
 - Patreon: [https://patreon.com/a2rp](https://patreon.com/a2rp)
-<!-- Project links -->
-
-## Links
-
-- Live: [https://a2rp.github.io/html-core-notes/](https://a2rp.github.io/html-core-notes/)
-- Repository: [https://github.com/a2rp/html-core-notes](https://github.com/a2rp/html-core-notes)
-- Portfolio: [https://www.ashishranjan.net/](https://www.ashishranjan.net/)
-- GitHub: [https://github.com/a2rp](https://github.com/a2rp)
-- CodePen: [https://codepen.io/ash1198](https://codepen.io/ash1198)
-- LinkedIn: [https://www.linkedin.com/in/aashishranjan](https://www.linkedin.com/in/aashishranjan)
-- Facebook: [https://www.facebook.com/theash.ashish/](https://www.facebook.com/theash.ashish/)
-- YouTube: [https://www.youtube.com/@ashishranjan-ashz?sub_confirmation=1](https://www.youtube.com/@ashishranjan-ashz?sub_confirmation=1)
-- Email: [ash.ranjan09@gmail.com](mailto:ash.ranjan09@gmail.com)
-
-## Support
-
-- Support: [https://a2rp-donation-page.netlify.app/](https://a2rp-donation-page.netlify.app/)
-- Buy Me a Coffee: [https://buymeacoffee.com/a2rp](https://buymeacoffee.com/a2rp)
-- Patreon: [https://www.patreon.com/a2rp](https://www.patreon.com/a2rp)

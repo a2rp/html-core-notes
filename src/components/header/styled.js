@@ -139,5 +139,70 @@ export const Styled = {
                 }
             }
         }
+
+        .quickNav {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: auto;
+
+            a {
+                padding: 8px 9px;
+                border: 1px solid transparent;
+                border-radius: 8px;
+                color: var(--color-text-muted);
+                text-decoration: none;
+                font-size: 12px;
+                transition: color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+            }
+
+            a:hover,
+            a:focus-visible {
+                color: var(--color-text-primary);
+                border-color: var(--color-border-light);
+                box-shadow: 0 0 0 3px var(--color-border);
+                outline: none;
+            }
+
+            @media (width < 760px) {
+                display: none;
+
+                &.open {
+                    position: absolute;
+                    top: 58px;
+                    right: 16px;
+                    display: grid;
+                    min-width: 170px;
+                    padding: 8px;
+                    border: 1px solid var(--color-border);
+                    border-radius: 12px;
+                    background: var(--color-surface);
+                    box-shadow: 0 16px 35px var(--color-shadow);
+
+                    a { width: 100%; }
+                }
+            }
+        }
+
+        .menuToggleBtn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--color-border);
+            border-radius: 9px;
+            color: var(--color-text-primary);
+            background: var(--color-surface);
+
+            &:hover,
+            &:focus-visible {
+                border-color: var(--color-border-light);
+                box-shadow: 0 0 0 3px var(--color-border);
+                outline: none;
+            }
+
+            @media (width < 760px) { display: inline-flex; }
+        }
     `,
 };

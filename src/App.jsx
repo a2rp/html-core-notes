@@ -3,8 +3,8 @@ import React from "react";
 import { Styled } from "./App.styled";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import ScrollToTop from "./components/scrollToTop";
 import AboutHtml from "./components/aboutHtml";
-import TopicsMap from "./components/topicsMap";
 import Introduction from "./components/topics/foundation/introduction";
 import BasicDocumentStructure from "./components/topics/foundation/basicDocumentStructure";
 import HtmlSyntaxRules from "./components/topics/foundation/htmlSyntaxRules";
@@ -51,7 +51,7 @@ const App = () => {
             <Styled.Header>
                 <Header />
             </Styled.Header>
-            <Styled.Main>
+            <Styled.Main id="notes-main">
                 <div className="contentWrapper">
                     {/* about html */}
                     {/* <div className="aboutHtml"></div> */}
@@ -60,14 +60,14 @@ const App = () => {
                     {/* <TopicsMap /> */}
 
                     {/* foundation */}
-                    <h1 className="category">Foundation</h1>
+                    <h1 className="category" id="foundation">Foundation</h1>
                     <Introduction />
                     <BasicDocumentStructure />
                     <HtmlSyntaxRules />
                     <ContentModel />
 
                     {/* text content */}
-                    <h1 className="category">Text Content</h1>
+                    <h1 className="category" id="text-content">Text Content</h1>
                     <Headings />
                     <ParagraphTextSemantics />
                     <Lists />
@@ -96,7 +96,7 @@ const App = () => {
                     <TableStructure />
 
                     {/* forms */}
-                    <h1 className="category">Forms</h1>
+                    <h1 className="category" id="forms">Forms</h1>
                     <FormBasics />
                     <InputTypes />
                     <FormControls />
@@ -121,7 +121,7 @@ const App = () => {
                     <TabOrder />
 
                     {/* advanced */}
-                    <h1 className="category">Advanced</h1>
+                    <h1 className="category" id="advanced">Advanced</h1>
                     <Microdata />
                     <StructuredDataJsonLd />
                     <CustomDataAttributes />
@@ -136,6 +136,7 @@ const App = () => {
                     <Footer />
                 </div>
             </Styled.Main>
+            <ScrollToTop />
         </Styled.Wrapper>
     );
 };

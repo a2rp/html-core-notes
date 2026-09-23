@@ -2,6 +2,7 @@
     "name": "html-core-notes",
     "private": true,
     "version": "1.0.0",
+    "homepage": "https://a2rp.github.io/html-core-notes/",
     "type": "module",
     "scripts": {
         "dev": "vite",
