@@ -1,6 +1,6 @@
 # HTML Core Notes
 
-![HTML Core Notes preview](screenshot.png)
+![HTML Core Notes screenshot](./screenshot.jpg)
 
 A single-page HTML revision guide for fast, practical learning. It organizes core concepts into expandable topic cards covering structure, semantics, content, forms, media, accessibility, metadata, performance, SEO, and security.
 
