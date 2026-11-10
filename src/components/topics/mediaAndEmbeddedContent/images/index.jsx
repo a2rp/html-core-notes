@@ -1,5 +1,5 @@
 // index.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { Styled } from "./styled";
 import {
     FiChevronDown,
@@ -37,13 +37,15 @@ const ImagesTopic = () => {
                 <section className="section">
                     <h3 className="h3">img</h3>
                     <p className="p">
-                        The img element is used to display an image in HTML. It
-                        is a self closing element and must include the src
-                        attribute.
+                        The img element embeds an image and is a void element,
+                        so it has no closing tag. A trailing slash is optional
+                        and does not make an HTML element self-closing. Use src
+                        for a single image resource; picture and srcset can
+                        provide alternative sources.
                     </p>
 
                     <div className="code">
-                        {`<img src="image.jpg" alt="A description" />`}
+                        {`<img src="image.jpg" alt="A description">`}
                     </div>
                 </section>
 
@@ -51,15 +53,16 @@ const ImagesTopic = () => {
                 <section className="section">
                     <h3 className="h3">alt</h3>
                     <p className="p">
-                        The alt attribute provides alternative text for
-                        accessibility and screen readers. If the image fails to
-                        load, this text is shown instead.
+                        The alt attribute provides the image's text alternative
+                        for assistive technology and when the image cannot be
+                        presented. Describe the information or function the
+                        image adds to the page.
                     </p>
 
                     <ul className="bullets">
                         <li>
                             <FiCheckCircle />
-                            Always describe the image meaningfully
+                            Describe informative images in their context
                         </li>
                         <li>
                             <FiCheckCircle />
@@ -68,7 +71,7 @@ const ImagesTopic = () => {
                     </ul>
 
                     <div className="code">
-                        {`<img src="profile.jpg" alt="Portrait of John Doe" />`}
+                        {`<img src="profile.jpg" alt="Portrait of John Doe">`}
                     </div>
                 </section>
 
@@ -85,8 +88,7 @@ const ImagesTopic = () => {
   src="photo.jpg" 
   alt="Landscape" 
   width="800" 
-  height="500" 
-/>`}
+  height="500">`}
                     </div>
                 </section>
 
@@ -94,23 +96,24 @@ const ImagesTopic = () => {
                 <section className="section">
                     <h3 className="h3">loading attribute</h3>
                     <p className="p">
-                        The loading attribute controls when the image loads. It
-                        improves performance.
+                        The loading attribute lets the browser defer offscreen
+                        images. The browser decides when a lazy image is close
+                        enough to load.
                     </p>
 
                     <ul className="bullets">
                         <li>
                             <FiCheckCircle />
-                            lazy loads image only when near viewport
+                            lazy allows the browser to defer an offscreen image
                         </li>
                         <li>
                             <FiCheckCircle />
-                            eager loads immediately
+                            eager requests the image without lazy deferral
                         </li>
                     </ul>
 
                     <div className="code">
-                        {`<img src="banner.jpg" alt="Banner" loading="lazy" />`}
+                        {`<img src="banner.jpg" alt="Banner" loading="lazy">`}
                     </div>
                 </section>
 
@@ -134,7 +137,7 @@ const ImagesTopic = () => {
                     </ul>
 
                     <div className="code">
-                        {`<img src="hero.jpg" alt="Hero" decoding="async" />`}
+                        {`<img src="hero.jpg" alt="Hero" decoding="async">`}
                     </div>
                 </section>
 
@@ -150,8 +153,7 @@ const ImagesTopic = () => {
                         {`<img 
   src="small.jpg"
   srcset="small.jpg 480w, medium.jpg 800w, large.jpg 1200w"
-  alt="Responsive image"
-/>`}
+  alt="Responsive image">`}
                     </div>
                 </section>
 
@@ -159,8 +161,9 @@ const ImagesTopic = () => {
                 <section className="section">
                     <h3 className="h3">sizes</h3>
                     <p className="p">
-                        The sizes attribute works with srcset to define how much
-                        screen width the image should occupy.
+                        With width-descriptor srcset candidates, sizes tells the
+                        browser the image's expected rendered width so it can
+                        choose a suitable source. CSS controls the actual size.
                     </p>
 
                     <div className="code">
@@ -168,8 +171,7 @@ const ImagesTopic = () => {
   src="small.jpg"
   srcset="small.jpg 480w, large.jpg 1200w"
   sizes="(max-width: 600px) 100vw, 50vw"
-  alt="Responsive"
-/>`}
+  alt="Responsive">`}
                     </div>
                 </section>
 
@@ -183,9 +185,9 @@ const ImagesTopic = () => {
 
                     <div className="code">
                         {`<picture>
-  <source media="(max-width: 600px)" srcset="mobile.jpg" />
-  <source media="(max-width: 1200px)" srcset="tablet.jpg" />
-  <img src="desktop.jpg" alt="Responsive image" />
+  <source media="(max-width: 600px)" srcset="mobile.jpg">
+  <source media="(max-width: 1200px)" srcset="tablet.jpg">
+  <img src="desktop.jpg" alt="Responsive image">
 </picture>`}
                     </div>
                 </section>
@@ -200,7 +202,7 @@ const ImagesTopic = () => {
 
                     <div className="code">
                         {`<figure>
-  <img src="chart.png" alt="Sales chart" />
+  <img src="chart.png" alt="Sales chart">
   <figcaption>Monthly sales performance</figcaption>
 </figure>`}
                     </div>

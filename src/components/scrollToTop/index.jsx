@@ -19,7 +19,13 @@ export default function ScrollToTop() {
             type="button"
             data-visible={visible}
             aria-label="Scroll to top"
-            onClick={() => document.getElementById("notes-main")?.scrollTo({ top: 0, behavior: "smooth" })}
+            aria-hidden={!visible}
+            disabled={!visible}
+            tabIndex={visible ? 0 : -1}
+            onClick={() => document.getElementById("notes-main")?.scrollTo({
+                top: 0,
+                behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+            })}
         >
             <FiArrowUp aria-hidden="true" />
         </TopButton>
@@ -45,5 +51,6 @@ const TopButton = styled.button`
     transition: opacity 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 
     &[data-visible="true"] { opacity: 1; pointer-events: auto; }
+    &:disabled { opacity: 0; }
     &:hover, &:focus-visible { border-color: var(--color-text-primary); box-shadow: 0 0 0 4px var(--color-border); outline: none; }
 `;

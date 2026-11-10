@@ -1,5 +1,5 @@
 // index.jsx
-import React, { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Styled } from "./styled";
 import {
     FiChevronDown,
@@ -560,11 +560,11 @@ const TopicsMap = () => {
     const clearSearch = () => setQuery("");
 
     return (
-        <Styled.Wrapper ref={rootRef}>
+        <Styled.Wrapper ref={rootRef} id="topic-map" tabIndex={-1} aria-labelledby="topic-map-title">
             <div className="container">
                 <div className="top">
                     <div className="titleRow">
-                        <h2 className="title">HTML Topic Map</h2>
+                        <h2 className="title" id="topic-map-title">HTML Topic Map</h2>
                         <div className="chips">
                             <div className="chip">
                                 {counts.sections} sections
@@ -635,6 +635,7 @@ const TopicsMap = () => {
                                     className="sectionHeader"
                                     onClick={() => toggleSection(section.key)}
                                     aria-expanded={isOpen}
+                                    aria-controls={`topic-map-${section.key}`}
                                 >
                                     <span className="chev">
                                         {isOpen ? (
@@ -658,9 +659,11 @@ const TopicsMap = () => {
                                 </button>
 
                                 <div
+                                    id={`topic-map-${section.key}`}
                                     className={`sectionBody ${
                                         isOpen ? "open" : ""
                                     }`}
+                                    aria-hidden={!isOpen}
                                 >
                                     {section.items.map((topic, idx) => {
                                         return (

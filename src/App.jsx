@@ -1,10 +1,10 @@
 // App.jsx
-import React from "react";
 import { Styled } from "./App.styled";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import ScrollToTop from "./components/scrollToTop";
 import AboutHtml from "./components/aboutHtml";
+import TopicsMap from "./components/topicsMap";
 import Introduction from "./components/topics/foundation/introduction";
 import BasicDocumentStructure from "./components/topics/foundation/basicDocumentStructure";
 import HtmlSyntaxRules from "./components/topics/foundation/htmlSyntaxRules";
@@ -57,46 +57,46 @@ const App = () => {
                     {/* <div className="aboutHtml"></div> */}
                     <AboutHtml />
 
-                    {/* <TopicsMap /> */}
+                    <TopicsMap />
 
                     {/* foundation */}
-                    <h1 className="category" id="foundation">Foundation</h1>
+                    <h2 className="category" id="foundation" tabIndex={-1}>Foundation</h2>
                     <Introduction />
                     <BasicDocumentStructure />
                     <HtmlSyntaxRules />
                     <ContentModel />
 
                     {/* text content */}
-                    <h1 className="category" id="text-content">Text Content</h1>
+                    <h2 className="category" id="text-content" tabIndex={-1}>Text Content</h2>
                     <Headings />
                     <ParagraphTextSemantics />
                     <Lists />
 
                     {/* links and navigations */}
-                    <h1 className="category">Links and Navigations</h1>
+                    <h2 className="category" id="links-navigation" tabIndex={-1}>Links and Navigation</h2>
                     <Anchors />
                     <Navigation />
 
                     {/* media and embedded content */}
-                    <h1 className="category">Media and Embedded Content</h1>
+                    <h2 className="category" id="media" tabIndex={-1}>Media and Embedded Content</h2>
                     <ImagesTopic />
                     <Embedded />
                     <SvgIntegration />
                     <CanvasBasics />
 
                     {/* structure and semantics */}
-                    <h1 className="category">Structure and Semantics</h1>
+                    <h2 className="category" id="structure" tabIndex={-1}>Structure and Semantics</h2>
                     <SectioningElements />
                     <DocumentLandmarks />
                     <DetailsAndDisclosure />
                     <DialogTopic />
 
                     {/* tables */}
-                    <h1 className="category">Tables</h1>
+                    <h2 className="category" id="tables" tabIndex={-1}>Tables</h2>
                     <TableStructure />
 
                     {/* forms */}
-                    <h1 className="category" id="forms">Forms</h1>
+                    <h2 className="category" id="forms" tabIndex={-1}>Forms</h2>
                     <FormBasics />
                     <InputTypes />
                     <FormControls />
@@ -104,24 +104,24 @@ const App = () => {
                     <AccessibilityInForms />
 
                     {/* meta data */}
-                    <h1 className="category">Meta Data</h1>
+                    <h2 className="category" id="metadata" tabIndex={-1}>Metadata</h2>
                     <MetaTags />
                     <LinkElement />
                     <BaseElement />
 
                     {/* scrooipts and perfromance */}
-                    <h1 className="category">Scripts and Performance</h1>
+                    <h2 className="category" id="scripts" tabIndex={-1}>Scripts and Performance</h2>
                     <ScriptElement />
                     <PerformanceAttributes />
 
                     {/* accessibility */}
-                    <h1 className="category">Accessibility</h1>
+                    <h2 className="category" id="accessibility" tabIndex={-1}>Accessibility</h2>
                     <AriaBasics />
                     <SemanticHtmlVsDivSoup />
                     <TabOrder />
 
                     {/* advanced */}
-                    <h1 className="category" id="advanced">Advanced</h1>
+                    <h2 className="category" id="advanced" tabIndex={-1}>Advanced</h2>
                     <Microdata />
                     <StructuredDataJsonLd />
                     <CustomDataAttributes />

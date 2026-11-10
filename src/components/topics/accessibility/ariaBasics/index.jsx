@@ -1,5 +1,5 @@
 // index.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { Styled } from "./styled";
 import { FiChevronDown, FiChevronRight, FiShield } from "react-icons/fi";
 
@@ -37,16 +37,18 @@ const AriaBasics = () => {
                         are not enough.
                     </p>
                     <p className="p">
-                        Important rule: Use semantic HTML first. Only use ARIA
-                        when native HTML cannot solve the problem.
+                        Start with semantic HTML. Add ARIA when it supplies a
+                        missing accessible name, state, or relationship, and
+                        avoid overriding native semantics unnecessarily.
                     </p>
                 </div>
 
                 <div className="section">
                     <h3 className="h3">aria-label</h3>
                     <p className="p">
-                        aria-label provides a text label directly to screen
-                        readers. It is useful when there is no visible text.
+                        aria-label provides an accessible name through the
+                        accessibility tree. It is useful when a control has no
+                        visible text label.
                     </p>
 
                     <div className="code">
@@ -105,9 +107,10 @@ const AriaBasics = () => {
                 <div className="section">
                     <h3 className="h3">aria-hidden</h3>
                     <p className="p">
-                        aria-hidden="true" hides content from screen readers. It
-                        does not visually hide content. It only affects
-                        accessibility APIs.
+                        aria-hidden="true" removes content from the
+                        accessibility tree. It does not visually hide content,
+                        so use it only when assistive technology should ignore
+                        that content.
                     </p>
 
                     <div className="code">
@@ -133,9 +136,10 @@ const AriaBasics = () => {
                     </div>
 
                     <p className="note">
-                        If you use role="button", you must also handle keyboard
-                        interaction properly. That is why native button is
-                        always better.
+                        If you use role="button", you must also make the
+                        element focusable and implement keyboard activation.
+                        Prefer a native button when possible because it already
+                        provides those behaviors.
                     </p>
                 </div>
 

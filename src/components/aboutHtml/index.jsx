@@ -1,5 +1,4 @@
 // index.jsx
-import React from "react";
 import { Styled } from "./styled";
 
 const AboutHtml = () => {
@@ -16,9 +15,9 @@ const AboutHtml = () => {
     });
 
     return (
-        <Styled.Wrapper id="about-html">
+        <Styled.Wrapper id="about-html" tabIndex={-1}>
             <Styled.Content>
-                <h2 className="heading">About HTML</h2>
+                <h1 className="heading">About HTML</h1>
 
                 <p>
                     HTML stands for HyperText Markup Language. It is the

@@ -1,4 +1,3 @@
-import React from "react";
 import { Styled } from "./styled";
 
 const Images = () => {
@@ -10,8 +9,9 @@ const Images = () => {
                 <h3>Basic image tag</h3>
 
                 <p>
-                    The <code>&lt;img&gt;</code> tag is used to display images.
-                    It is a self closing tag.
+                    The <code>&lt;img&gt;</code> element embeds an image. It is
+                    a void element with no closing tag; a trailing slash does
+                    not make an HTML element self-closing.
                 </p>
 
                 <pre>{`<img src="image.jpg" alt="Description of image">`}</pre>
@@ -27,9 +27,9 @@ const Images = () => {
 
                 <ul>
                     <li>Improves accessibility</li>
-                    <li>Displayed if image fails to load</li>
+                    <li>Provides a text alternative when the image is unavailable</li>
                     <li>Used by screen readers</li>
-                    <li>Helps SEO</li>
+                    <li>Helps search engines understand image content</li>
                 </ul>
 
                 <pre>
@@ -100,7 +100,8 @@ const Images = () => {
                 </pre>
 
                 <p>
-                    loading="lazy" delays loading until image is near viewport.
+                    loading="lazy" lets the browser defer offscreen images; the
+                    browser decides when to fetch them.
                 </p>
             </div>
 

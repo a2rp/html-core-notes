@@ -1,5 +1,5 @@
 // index.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { Styled } from "./styled";
 import {
     FiChevronDown,
@@ -87,7 +87,9 @@ const TabOrder = () => {
                             </span>
                             <div className="miniText">
                                 <div className="miniTitle">Enter / Space</div>
-                                <div className="miniSub">Activate controls</div>
+                                <div className="miniSub">
+                                    Enter activates links; Space activates buttons
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -105,8 +107,8 @@ const TabOrder = () => {
                     <ul className="bullets">
                         <li>
                             <span className="dot" />
-                            Links, buttons, inputs, selects, and textareas are
-                            focusable by default
+                            Links with href and enabled buttons and form
+                            controls are focusable by default
                         </li>
                         <li>
                             <span className="dot" />
@@ -160,7 +162,8 @@ const TabOrder = () => {
                         <div className="row">
                             <div className="cell mono">-1</div>
                             <div className="cell">
-                                Element is focusable only via script, not Tab
+                                Element can be focused with script but is skipped
+                                in sequential Tab navigation
                             </div>
                             <div className="cell">
                                 For focus management inside modals, menus, and
