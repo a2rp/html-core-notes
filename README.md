@@ -25,12 +25,15 @@ npm install
 npm run dev
 ```
 
+Run `npm run lint` to check the source files.
+
 ## Deployment
 
 ```bash
-npm run build
 npm run deploy
 ```
+
+The deploy script runs lint, creates the production build, adds a GitHub Pages route fallback, and publishes `dist/` to the `gh-pages` branch.
 
 Live app: [https://a2rp.github.io/html-core-notes/](https://a2rp.github.io/html-core-notes/)
 

@@ -200,7 +200,7 @@ const ParagraphTextSemantics = () => {
             await navigator.clipboard.writeText(text);
             setCopiedKey(key);
             window.setTimeout(() => setCopiedKey(""), 900);
-        } catch (e) {
+        } catch {
             // do nothing
         }
     };
